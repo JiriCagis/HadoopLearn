@@ -67,12 +67,15 @@ Often used algorithm for non-hierarchical clusters analyze. It assume, that obje
 1. Iteration: centroids {(1,1),(2,1)} # Random choosed
     (1,1) -> {(1,2),(1,3)}
     (2,1) -> {(6,3)(7,3)(6,4)(7,4)(7,5)}
+
 2. Iteration: centroids {(1,2)(6,3)} # New centroids from mean vertices in cluster
     (1,2) -> {(1,1)(2,1)(1,3)}
     (6,3) -> {(7,3)(6,4)(7,4)(7,5)}
+
 3. Iteration: centroids {(1,2)(7,4)} # New centroids from mean vertices in cluster
     (1,2) -> {(1,1)(2,1)(1,3)}
     (7,4) -> {(7,3)(6,4)(6,3)(7,5)}
+
 4. Iteration: centroids {(1,2)(7,4)} # It find same centroid and finish calculate
 </pre>
 
