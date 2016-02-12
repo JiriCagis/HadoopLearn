@@ -18,7 +18,7 @@ import java.io.File;
  * <p>
  * How work:
  * 1. Load first N vectors from input file and denote as previous clusters
- * 2. Divide all vertices to group by distance of previous clusters and calculate average vector in groups.
+ * 2. Divide all vertices to group by distance of previous centroids and calculate average vector in groups.
  * Denote this vector as potential centroid.
  * 3. For each potential centroid find nearest point from data set and mark as new centroid.
  * 4. Verify if previous and new centroids are same. If centroids are same, algorithm finish and show clusters.
