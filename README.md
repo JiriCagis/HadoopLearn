@@ -56,6 +56,8 @@ left number mean number document and right number is occurence in this document.
 
 Often used algorithm for non-hierarchical clusters analyze. It assume, that objects present points in euclide space and count clusters is know in advance. Clusters are define his centroids. Centroid is point in cluster. Objects are add to cluster with nearest centroid. On start take first N clusters and assign objects to him. After it recalculate centroids by mean point in cluster. If are new centroids same algorithm finish, else it iterative work further. This implementation support find clusters in 2d decimal vectors.
 
+<p align='center'><img src='http://3.bp.blogspot.com/-5vr_gg5oUME/VSr9P-mQJnI/AAAAAAAAALY/MNdRgs9bbE8/s1600/plot_mean_shift.png' width='55%' title='Sample graph for explain.'> </p>
+
 <br><b> How it works: </b>
 <ol>
   <li>Load first N vectors from input file and denote as previous clusters.</li>
@@ -66,7 +68,6 @@ Often used algorithm for non-hierarchical clusters analyze. It assume, that obje
 </ol>
 
 <br><b>Example:</b>
-<p align='left'><img src='https://github.com/JiriCagis/HadoopLearn/blob/master/images/graphSample.png' width='55%' title='Sample graph for explain.'> </p>
 <pre>
 1. Iteration: centroids {(1,1),(2,1)} # Random choosed
     (1,1) -> {(1,2),(1,3)}
