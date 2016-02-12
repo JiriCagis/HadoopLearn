@@ -55,7 +55,7 @@ left number mean number document and right number is occurence in this document.
 <h3> K-means </h3>
 Clustering algorithm for machine learning or data analysis. Purpose is find similar group in data set.
 User specify how many group has algorithm find. This implementation support find clusters in 2d decimal vectors.
-<br><b> How it works </b><br>
+<br><br><b> How it works </b>
 <ol>
   <li>Load first N vectors from input file and denote as previous clusters.</li>
   <li>Divide all vertices to N groups by distance of previous clusters and calculate average vector in groups. Denote this vector as potential centroid. </li>
