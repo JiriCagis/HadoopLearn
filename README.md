@@ -53,13 +53,19 @@ left number mean number document and right number is occurence in this document.
 </div>
 
 <h3> K-means </h3>
-Often used algorith for non-hierarchical clusters analyze. It assume, that objects present points in euclide space and count clusters is know in advance. Clusters are define his centroids. Centroid is point in cluster. Objects are add to cluster with nearest centroid. On start take first N clusters and assign objects to him. After it recalculate centroids by mean point in cluster. If are new centroids same algorithm finish, else it iterative work further. This implementation support find clusters in 2d decimal vectors.
-<br><br><b> How it works </b>
+Often used algorithm for non-hierarchical clusters analyze. It assume, that objects present points in euclide space and count clusters is know in advance. Clusters are define his centroids. Centroid is point in cluster. Objects are add to cluster with nearest centroid. On start take first N clusters and assign objects to him. After it recalculate centroids by mean point in cluster. If are new centroids same algorithm finish, else it iterative work further. This implementation support find clusters in 2d decimal vectors.
+<br><br><b> How it works: </b>
 <ol>
   <li>Load first N vectors from input file and denote as previous clusters.</li>
-  <li>Divide all vertices to N groups by distance of previous clusters and calculate average vector in groups. Denote this vector as potential centroid. </li>
+  <li>Divide all vertices to N groups by distance of previous centroids and calculate average vector in groups. Denote this vector as potential centroid. </li>
   <li>For each potential centroid find nearest point from data set and mark as new centroid.</li>
   <li>Verify if previous and new centroids are same. If centroids are same, algorithm finish and show clusters, else
   assign to previous clusters variable new clusters and go back to step 2.</li>
 </ol>
+<br><b>Example:</b>
+<pre>
+1. Iteration: centroids {(1,1),(2,1)} #random choosed
+    (1,1) -> {(1,2),(1,3)}
+    (2,1) -> {(6,3)(7,3)(6,4)(7,4)(7,5)}
+</pre>
 
