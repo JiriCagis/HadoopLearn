@@ -62,8 +62,9 @@ Often used algorithm for non-hierarchical clusters analyze. It assume, that obje
   <li>Verify if previous and new centroids are same. If centroids are same, algorithm finish and show clusters, else
   assign to previous clusters variable new clusters and go back to step 2.</li>
 </ol>
-<br><b>Example:</b>
+
 <p align='center'><img src='https://github.com/JiriCagis/HadoopLearn/blob/master/images/graphSample.png' width='55%'> </p>
+<br><b>Example:</b>
 <pre>
 1. Iteration: centroids {(1,1),(2,1)} # Random choosed
     (1,1) -> {(1,2),(1,3)}
