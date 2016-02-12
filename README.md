@@ -3,6 +3,10 @@
 <b> Framework Hadoop </b> <br>
 All programmed task use this framework, because it allows for the distributed processing of large data sets across clusters of computers using simple programming models. It is designed to scale up from single servers to thousands of machines, each offering local computation and storage. Rather than rely on hardware to deliver high-availability, the library itself is designed to detect and handle failures at the application layer, so delivering a highly-available service on top of a cluster of computers, each of which may be prone to failures.
 
+<div style="text-align:center">
+<img src="https://github.com/JiriCagis/HadoopLearn/blob/master/images/Hadoop_elephants.jpg"/>
+</div>
+
 <h3> Word counter </h3>
 This example show as hadoop framework working. Hadoop use mapreduce algorithm than divide task to dwo part.
 In first part map algorithm go through all lines text and individually word save to map and second part reduce algorithm sum occurrence word in  text.
