@@ -63,7 +63,7 @@ Often used algorithm for non-hierarchical clusters analyze. It assume, that obje
   assign to previous clusters variable new clusters and go back to step 2.</li>
 </ol>
 <br><b>Example:</b>
-<p align='center'><img src='https://github.com/JiriCagis/HadoopLearn/blob/master/images/graphSample.png' width='40%'> </p>
+<p align='center'><img src='https://github.com/JiriCagis/HadoopLearn/blob/master/images/graphSample.png' width='55%'> </p>
 <pre>
 1. Iteration: centroids {(1,1),(2,1)} # Random choosed
     (1,1) -> {(1,2),(1,3)}
