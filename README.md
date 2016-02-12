@@ -1,7 +1,7 @@
 <p align='center'><h1> Data analysis </h1></p>
 
 <b> Framework Hadoop </b> <br>
-All programmed task use this framework, because it allows for the distributed processing of large data sets across clusters of computers using simple programming models. It is designed to scale up from single servers to thousands of machines, each offering local computation and storage. Rather than rely on hardware to deliver high-availability, the library itself is designed to detect and handle failures at the application layer, so delivering a highly-available service on top of a cluster of computers, each of which may be prone to failures.
+All programmed task use this framework, because it allows for the distributed processing of large data sets across clusters of computers using simple programming model by map reduce. It is designed to scale up from single servers to thousands of machines, each offering local computation and storage. Rather than rely on hardware to deliver high-availability, the library itself is designed to detect and handle failures at the application layer, so delivering a highly-available service on top of a cluster of computers, each of which may be prone to failures.
 
 <p align='center'>
 <img src="https://github.com/JiriCagis/HadoopLearn/blob/master/images/Hadoop_elephants.jpg"/>
@@ -52,6 +52,8 @@ you     : 4 : (1, 1), (2, 1), (3, 1), (4, 1)
 left number mean number document and right number is occurence in this document.
 </div>
 
-
-</div>
+<h3> K-means </h3>
+Clustering algorithm for machine learning or data analysis. Purpose is find similar group in data set.
+User specify how many group has algorithm find. This implementation support find clusters in 2d decimal vectors.
+<h2> How it works </2>
 
