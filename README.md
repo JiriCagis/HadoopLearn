@@ -53,6 +53,7 @@ left number mean number document and right number is occurence in this document.
 </div>
 
 <h3> K-means </h3>
+<p align='center'><img src='https://github.com/JiriCagis/HadoopLearn/blob/master/images/graphSample.png' width='55%' title='Sample graph for explain.'> </p>
 Often used algorithm for non-hierarchical clusters analyze. It assume, that objects present points in euclide space and count clusters is know in advance. Clusters are define his centroids. Centroid is point in cluster. Objects are add to cluster with nearest centroid. On start take first N clusters and assign objects to him. After it recalculate centroids by mean point in cluster. If are new centroids same algorithm finish, else it iterative work further. This implementation support find clusters in 2d decimal vectors.
 <br><br><b> How it works: </b>
 <ol>
@@ -79,5 +80,5 @@ Often used algorithm for non-hierarchical clusters analyze. It assume, that obje
 
 4. Iteration: centroids {(1,2)(7,4)} # It find same centroid and finish calculate
 </pre>
-<p align='center'><img src='https://github.com/JiriCagis/HadoopLearn/blob/master/images/graphSample.png' width='55%' title='Sample graph for explain.'> </p>
+
 
