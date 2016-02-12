@@ -79,6 +79,5 @@ Often used algorithm for non-hierarchical clusters analyze. It assume, that obje
 
 4. Iteration: centroids {(1,2)(7,4)} # It find same centroid and finish calculate
 </pre>
-
-<p align='center'><img src='https://github.com/JiriCagis/HadoopLearn/blob/master/images/graphSample.png' width='55%'> </p>
+<p align='center'><img src='https://github.com/JiriCagis/HadoopLearn/blob/master/images/graphSample.png' width='55%' title='Sample graph for explain.'> </p>
 
