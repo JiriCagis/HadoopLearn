@@ -50,6 +50,15 @@ public class FindClusterMapReduce extends MapReduce<String> {
         return lines.toArray(new String[lines.size()]);
     }
 
+    public void setCentroids(Vertex[] centroids) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < centroids.length - 1; i++) {
+            builder.append(centroids[i] + SEPARATOR);
+        }
+        builder.append(centroids[centroids.length - 1]);
+        this.centroids = builder.toString();
+    }
+
     public static class MyMapper extends Mapper<Object, Text, Vertex, Text> {
         private Vertex[] CENTROIDS;
 
@@ -93,15 +102,6 @@ public class FindClusterMapReduce extends MapReduce<String> {
             context.write(centroid, result);
         }
 
-    }
-
-    public void setCentroids(Vertex[] centroids) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < centroids.length - 1; i++) {
-            builder.append(centroids[i] + SEPARATOR);
-        }
-        builder.append(centroids[centroids.length - 1]);
-        this.centroids = builder.toString();
     }
 
 }

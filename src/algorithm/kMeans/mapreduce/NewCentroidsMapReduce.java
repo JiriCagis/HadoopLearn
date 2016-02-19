@@ -50,8 +50,12 @@ public class NewCentroidsMapReduce extends MapReduce<Vertex> {
         List<Vertex> centroids = new ArrayList<>();
         for (String line:lines) {
             String[] vertices = line.split("\t");
-            String[] items = vertices[1].split(",");
-            Vertex vertex = new Vertex(Float.parseFloat(items[0]), Float.parseFloat(items[1]));
+            String[] coordinatesString = vertices[1].split(",");
+            float[] coordinates = new float[coordinatesString.length];
+            for(int k=0;k<coordinates.length;k++){
+                coordinates[k] = Float.parseFloat(coordinatesString[k]);
+            }
+            Vertex vertex = new Vertex(coordinates);
             centroids.add(vertex);
         }
         return centroids.toArray(new Vertex[centroids.size()]);

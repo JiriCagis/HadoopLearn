@@ -19,20 +19,24 @@ public class Mathematic {
 
     /**
      * Function take line and convert to object Vertex.
-     * @param line linue must be formatted as "12.34,10.23"
+     *
+     * @param line linue must be formatted as "12.34,10.23,12.4,...."
      * @return object Vertex
      */
     public static Vertex convert(String line) {
         String[] items = line.split(",");
-        float x = Float.parseFloat(items[0]);
-        float y = Float.parseFloat(items[1]);
-        return new Vertex(x, y);
+        float[] coordinates = new float[items.length];
+        for (int k = 0; k < items.length; k++) {
+            coordinates[k] = Float.parseFloat(items[k]);
+        }
+        return new Vertex(coordinates);
     }
 
     /**
      * Get first n (count) centroids from input file
+     *
      * @param inputFile path to file
-     * @param count count centroids for get from input file
+     * @param count     count centroids for get from input file
      * @return array of centroids
      */
     public static Vertex[] loadCentroids(String inputFile, int count) {
@@ -54,17 +58,28 @@ public class Mathematic {
     }
 
     /**
-     * Function calculate euklide distance between two vertices.
+     * Function calculate euclide distance between two vertices.
+     * When vertex contains different count coordinates return value -1
+     *
      * @param vertex1
      * @param vertex2
      * @return distance
      */
-    public static float calculateDistance(Vertex vertex1,Vertex vertex2){
-        float x1 = vertex1.getX().get();
-        float y1 = vertex1.getY().get();
-        float x2 = vertex2.getX().get();
-        float y2 = vertex2.getY().get();
-        return (float) Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2,2));
+    public static float calculateDistance(Vertex vertex1, Vertex vertex2) {
+        float result = 0;
+        float[] coordinates1 = vertex1.getCoordinates();
+        float[] coordinates2 = vertex2.getCoordinates();
+
+        if (coordinates1.length != coordinates2.length) {
+            return -1;
+        }
+
+        for (int k = 0; k < coordinates1.length; k++) {
+            float x1 = coordinates1[k];
+            float x2 = coordinates2[k];
+            result+=Math.pow(x1-x2,2);
+        }
+        return (float) Math.sqrt(result);
     }
 
 }

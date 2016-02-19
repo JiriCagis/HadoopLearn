@@ -106,28 +106,29 @@ public class Kmeans {
      * Function decide if are lists of centroids same, compute difference between
      * X and Y coordinate. If difference is biggest then 0.5 list of centroids not
      * same
+     *
      * @param oldCentroids array of centroids
      * @param newCentroids array of centroids
      * @return return true if difference coordinates is smaller then 0.5
      */
     private boolean isSame(Vertex[] oldCentroids, Vertex[] newCentroids) {
         for (int i = 0; i < oldCentroids.length; i++) {
-            float x1 = oldCentroids[i].getX().get();
-            float x2 = newCentroids[i].getX().get();
-            float differenceX = Math.abs(x1 - x2);
-            if (differenceX > 0.5)
-                return false;
-            float y1 = oldCentroids[i].getY().get();
-            float y2 = newCentroids[i].getY().get();
-            float differenceY = Math.abs(y1 - y2);
-            if (differenceY > 0.5)
-                return false;
+            float[] oldCoordinates = oldCentroids[i].getCoordinates();
+            float[] newCoordinates = newCentroids[i].getCoordinates();
+
+            for (int k = 0; k < oldCoordinates.length; k++) {
+                float x1 = oldCoordinates[k];
+                float x2 = newCoordinates[k];
+                float differenceX = Math.abs(x1 - x2);
+                if (differenceX > 0.5)
+                    return false;
+            }
         }
         return true;
     }
 
     public static void main(String[] args) {
-        new Kmeans("inputs/graph.txt", "output", 2);
+        new Kmeans("inputs/iris.data.txt", "output", 10);
     }
 }
 

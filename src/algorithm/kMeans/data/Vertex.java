@@ -1,49 +1,87 @@
 package algorithm.kMeans.data;
 
+import org.apache.hadoop.io.FloatWritable;
+import org.apache.hadoop.io.WritableComparable;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-import org.apache.hadoop.io.FloatWritable;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.WritableComparable;
-
 /**
- * Container represent 2D vector with decimal coordinates X and Y
+ * Container represent n dimension vector with decimal coordinates.
  * Created by admin on 05/02/16.
  */
 public class Vertex implements WritableComparable<Vertex> {
-
-    private FloatWritable x;
-    private FloatWritable y;
+    private float[] coordinates;
 
     //CONSTRUCTORS
     public Vertex(){
-        x = new FloatWritable();
-        y = new FloatWritable();
+        coordinates = null;
     }
 
-    public Vertex(FloatWritable x, FloatWritable y){
-        this.x = x;
+    public Vertex(int size) {
+        coordinates = new float[size];
+        for (int k = 0; k < coordinates.length; k++) {
+            coordinates[k] = 0;
+        }
+
     }
 
-    public Vertex(float x, float y){
-        this.x = new FloatWritable(x);
-        this.y = new FloatWritable(y);
+    public Vertex(float[] coordinates) {
+        this.coordinates = coordinates;
     }
+
 
     //LOGIC
     @Override
     public void write(DataOutput dataOutput) throws IOException {
-        x.write(dataOutput);
-        y.write(dataOutput);
+        int length = 0;
+        if (coordinates != null) {
+            length = coordinates.length;
+        }
 
+        dataOutput.writeInt(length);
+
+        for (int k = 0; k < length; k++) {
+            dataOutput.writeFloat(coordinates[k]);
+        }
     }
 
     @Override
     public void readFields(DataInput dataInput) throws IOException {
-        x.readFields(dataInput);
-        y.readFields(dataInput);
+        int length = dataInput.readInt();
+        if(length>0){
+            coordinates = new float[length];
+
+            for(int k=0;k<length;k++){
+                coordinates[k] = dataInput.readFloat();
+            }
+        } else {
+            coordinates = null;
+        }
+    }
+
+    public boolean add(Vertex other) {
+        float[] result = new float[getSize()];
+        float[] coordinates1 = getCoordinates();
+        float[] coordinates2 = other.getCoordinates();
+
+        if (coordinates1.length != coordinates2.length) {
+            return false;
+        }
+
+        for (int k = 0; k < getSize(); k++) {
+            result[k] = coordinates1[k] + coordinates2[k];
+        }
+        setCoordinates(result);
+        return true;
+    }
+
+    public boolean div(float number) {
+        for(int k=0;k<coordinates.length;k++){
+            coordinates[k]/=number;
+        }
+        return true;
     }
 
 
@@ -54,32 +92,25 @@ public class Vertex implements WritableComparable<Vertex> {
 
     //GETTERS AND SETTERS
 
-    public FloatWritable getX() {
-        return x;
+    public float[] getCoordinates() {
+        return coordinates;
     }
 
-    public void setX(FloatWritable x) {
-        this.x = x;
+    public void setCoordinates(float[] coordinates) {
+        this.coordinates = coordinates;
     }
 
-    public void setX(int x) {
-        this.x = new FloatWritable(x);
-    }
-
-    public FloatWritable getY() {
-        return y;
-    }
-
-    public void setY(FloatWritable y) {
-        this.y = y;
-    }
-
-    public void setY(int y) {
-        this.y = new FloatWritable(y);
+    public int getSize() {
+        return coordinates.length;
     }
 
     @Override
     public String toString() {
-        return x.get() +","+y.get();
+        StringBuilder builder = new StringBuilder();
+        for (float coordinate : coordinates) {
+            builder.append(coordinate + ",");
+        }
+        builder.deleteCharAt(builder.lastIndexOf(","));
+        return builder.toString();
     }
 }

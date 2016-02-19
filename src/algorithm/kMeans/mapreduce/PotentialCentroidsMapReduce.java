@@ -52,8 +52,12 @@ public class PotentialCentroidsMapReduce extends MapReduce<Vertex>{
         List<String> lines = loadLines(MAX);
         for(String line:lines){
             String[] vertices = line.split("\t");
-            String[] coordinates = vertices[1].split(",");
-            Vertex vertex = new Vertex(Float.parseFloat(coordinates[0]),Float.parseFloat(coordinates[1]));
+            String[] coordinatesString = vertices[1].split(",");
+            float[] coordinates = new float[coordinatesString.length];
+            for(int k=0;k<coordinates.length;k++){
+                coordinates[k] = Float.parseFloat(coordinatesString[k]);
+            }
+            Vertex vertex = new Vertex(coordinates);
             result.add(vertex);
         }
         return result.toArray(new Vertex[result.size()]);
@@ -94,17 +98,30 @@ public class PotentialCentroidsMapReduce extends MapReduce<Vertex>{
 
         @Override
         public void reduce(Vertex centroid, Iterable<Text> vertices, Context context) throws IOException, InterruptedException {
+            Vertex sum = new Vertex(centroid.getSize());
+            int count = 0;
+            for (Text vertexStr : vertices) {
+                Vertex vertex = Mathematic.convert(vertexStr.toString());
+                sum.add(vertex);
+                count++;
+            }
+            Text intermediate = new Text(sum.toString() + SEPARATOR + count);
+            context.write(centroid,intermediate);
+
+            /*
             float sumX = 0;
             float sumY = 0;
             int count = 0;
             for (Text vertexStr : vertices) {
                 Vertex vertex = Mathematic.convert(vertexStr.toString());
+                vertex.ge
                 sumX += vertex.getX().get();
                 sumY += vertex.getY().get();
                 count++;
             }
             Text intermediate = new Text(sumX + "\t" + sumY + "\t" + count);
             context.write(centroid, intermediate);
+            */
         }
     }
 
@@ -112,6 +129,21 @@ public class PotentialCentroidsMapReduce extends MapReduce<Vertex>{
 
         @Override
         public void reduce(Vertex centroid, Iterable<Text> intermediates, Context context) throws IOException, InterruptedException {
+            Vertex totalSum = new Vertex(centroid.getSize());
+            int totalCount = 0;
+
+            for (Text intermediate:intermediates){
+                String[] items = intermediate.toString().split(SEPARATOR);
+                Vertex sum = Mathematic.convert(items[0]);
+                int count = Integer.parseInt(items[1]);
+                totalSum.add(sum);
+                totalCount+=count;
+            }
+
+            Vertex newCentroid = totalSum;
+            newCentroid.div(totalCount);
+            context.write(centroid,newCentroid);
+            /*
             float sumX = 0;
             float sumY = 0;
             int count = 0;
@@ -122,6 +154,7 @@ public class PotentialCentroidsMapReduce extends MapReduce<Vertex>{
                 count += Float.parseFloat(items[2]);
             }
             context.write(centroid, new Vertex(sumX / count, sumY / count));
+            */
         }
     }
 
