@@ -8,6 +8,7 @@ import algorithm.kMeans.utils.Mathematic;
 import util.MyHadoopUtil;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * K-means is used for machine learning or data analysis. Purpose is find clusters in data set.
@@ -29,6 +30,8 @@ public class Kmeans {
     private final String OUTPUT_PATH;
     private final int COUNT_CLUSTER;
 
+    private Vertex[] result;
+
     /**
      * Constructor, after create instantly calculate clusters in data set
      *
@@ -45,21 +48,20 @@ public class Kmeans {
         INPUT_PATH = inputPath;
         OUTPUT_PATH = outputPath;
         COUNT_CLUSTER = count_cluster;
+    }
 
-
+    public boolean execute(){
         Vertex[] previousCentroids = Mathematic.loadCentroids(INPUT_PATH, COUNT_CLUSTER);
         while (true) {
             Vertex[] centroids = calculatePotentialCentroids(previousCentroids);
-            Vertex[] new_centroids = calculateNewCentroids(centroids);
+            Vertex[] new_centroids = centroids;
             if (isSame(previousCentroids, new_centroids)) {
-                findClusters(new_centroids);
-                break;
+                result = new_centroids;
+                return true;
             } else {
                 previousCentroids = new_centroids;
             }
         }
-
-        MyHadoopUtil.showResult(new File(OUTPUT_PATH), COUNT_CLUSTER);
     }
 
 
@@ -127,8 +129,17 @@ public class Kmeans {
         return true;
     }
 
+    public Vertex[] getResult() {
+        return result;
+    }
+
     public static void main(String[] args) {
-        new Kmeans("inputs/iris.data.txt", "output", 10);
+        Kmeans kmeans = new Kmeans("inputs/graph.txt", "output", 2);
+        if(kmeans.execute()){
+            for(Vertex vertex:kmeans.getResult()){
+                System.out.println(vertex);
+            }
+        }
     }
 }
 
