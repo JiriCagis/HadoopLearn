@@ -74,7 +74,7 @@ public class FindClusterMapReduce extends MapReduce<String> {
                 }
             }
             String value2 = "(" + vertex.toString() + ")";
-            context.write(minCentroid, new Text(value2));
+            context.write(minCentroid, new Text(vertex.toString()));
         }
 
         @Override
@@ -95,8 +95,9 @@ public class FindClusterMapReduce extends MapReduce<String> {
         public void reduce(Vertex centroid, Iterable<Text> intermediate, Context context) throws IOException, InterruptedException {
             StringBuilder builder = new StringBuilder();
             for (Text item : intermediate) {
-                builder.append(item.toString());
+                builder.append(item.toString()+" ");
             }
+            builder.deleteCharAt(builder.length()-1);
 
             Text result = new Text(builder.toString());
             context.write(centroid, result);
