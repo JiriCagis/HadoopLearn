@@ -5,9 +5,7 @@ import algorithm.kMeans.mapreduce.FindClusterMapReduce;
 import algorithm.kMeans.mapreduce.NewCentroidsMapReduce;
 import algorithm.kMeans.mapreduce.PotentialCentroidsMapReduce;
 import algorithm.kMeans.utils.Mathematic;
-import util.MyHadoopUtil;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -93,7 +91,7 @@ public class Kmeans {
         return null;
     }
 
-    private void findClusters(Vertex[] centroids) {
+    private String[] findClusters(Vertex[] centroids) {
         FindClusterMapReduce mapReduce = new FindClusterMapReduce();
         mapReduce.setInputPath(INPUT_PATH);
         mapReduce.setOutputPath(OUTPUT_PATH);
@@ -101,7 +99,10 @@ public class Kmeans {
 
         mapReduce.configureJob();
 
-        mapReduce.execute();
+        if(mapReduce.execute()==true){
+            return mapReduce.getResult(COUNT_CLUSTER);
+        }
+        return null;
     }
 
     /**
@@ -129,15 +130,24 @@ public class Kmeans {
         return true;
     }
 
-    public Vertex[] getResult() {
+    public Vertex[] getFindCentroids() {
         return result;
+    }
+
+    public String[] getClusters(){
+        return findClusters(result);
     }
 
     public static void main(String[] args) {
         Kmeans kmeans = new Kmeans("inputs/graph.txt", "output", 2);
         if(kmeans.execute()){
-            for(Vertex vertex:kmeans.getResult()){
+            for(Vertex vertex:kmeans.getFindCentroids()){
                 System.out.println(vertex);
+            }
+
+            System.out.println("Clusters");
+            for(String line:kmeans.getClusters()){
+                System.out.println(line);
             }
         }
     }

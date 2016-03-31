@@ -4,7 +4,6 @@ import algorithm.kMeans.data.Vertex;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by admin on 28/02/16.
@@ -32,7 +31,7 @@ public class Report {
             builder.append("Dataset: " + dataset + "\t\t count centroids: "+ i + "\n");
             Kmeans kmeans = new Kmeans(dataset,"output",i);
             kmeans.execute();
-            Vertex[] result = kmeans.getResult();
+            Vertex[] result = kmeans.getFindCentroids();
             for (Vertex centroid : result) {
                 String textCentroid = centroid.toString();
                 textCentroid = textCentroid.replace(",","\t");
@@ -46,7 +45,7 @@ public class Report {
             builder.append("Dataset: " + dataset + "\t\t count centroids: "+ i + "\n");
             Kmeans kmeans = new Kmeans(dataset,"output",i);
             kmeans.execute();
-            Vertex[] result = kmeans.getResult();
+            Vertex[] result = kmeans.getFindCentroids();
             for (Vertex centroid : result) {
                 String textCentroid = centroid.toString();
                 textCentroid = textCentroid.replace(",","\t");
